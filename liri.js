@@ -60,6 +60,16 @@ function getTweets(){
 })
 
 function getMeSpotify(){
+
+    inquirer.prompt([
+        {
+            type: 'input',
+            message: 'Type in your song:',
+            name: "song"
+        }
+    ]).then(function(song){
+
+    });
     spotify.search({ type: 'artist OR album OR track', query: '' }, function(err, data) {
         if ( err ) {
             console.log('Error occurred: ' + err);
@@ -75,10 +85,30 @@ function getMeSpotify(){
 }
 
 function getMovies(){
+    inquirer.prompt([
+        {
+            type: 'input',
+            message: 'Type in movie name: ',
+            name: 'name'
+        }
+    ]).then(function (getMovies) {
+        console.log(movie.name);
+
     request('http://www.google.com', function (error, response, body) {
     if (!error && response.statusCode == 200) {
         console.log(body); 
-  }
+    }
+    console.log("--------------");
+    console.log("Title: " + Title);
+    console.log("Year: " + Year);
+    console.log("IMDB Rating: " + Rating1);
+    console.log("Country: " + Country);
+    console.log("Language: " + Language);
+    console.log("Plot: " + Plot);
+    console.log("Actors: " + Actors);
+    console.log("Rotten Tomatoes Rating: " + Rating2);
+    console.log("Rotten Tomatoes URL: " + URL);
+    console.log("--------------");
 })
 }
 
