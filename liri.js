@@ -1,5 +1,5 @@
 var fs = require ('fs');
-var keys = require('./keys.js');
+var key = require('./key.js');
 var Twitter = require('twitter');
 var Spotify = require('spotify-web-api-node');
 var request = require('request');
@@ -39,10 +39,10 @@ switchFunction();
 
 function getTweets(){
     var client = new Twitter({
-        consumer_key: keys.twitterKeys.consumer_key,
-        consumer_secret: keys.twitterKeys.consumer_secret,
-        access_token_key: keys.twitterKeys.access_token_key,
-        access_token_secret: keys.twitterKeys.access_token_secret
+        consumer_key: key.twitterKeys.consumer_key,
+        consumer_secret: key.twitterKeys.consumer_secret,
+        access_token_key: key.twitterKeys.access_token_key,
+        access_token_secret: key.twitterKeys.access_token_secret
     });
     var parameters = {
         twitterHandle: 'Ky-Chung',
