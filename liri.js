@@ -37,71 +37,76 @@ function switchFunction() {
 
 switchFunction();
 
-function getTweets(){
-    var client = new Twitter({
-        consumer_key: key.twitterKeys.consumer_key,
-        consumer_secret: key.twitterKeys.consumer_secret,
-        access_token_key: key.twitterKeys.access_token_key,
-        access_token_secret: key.twitterKeys.access_token_secret
-    });
-    var parameters = {
-        twitterHandle: 'Ky-Chung',
-        count: 20
-    };
-    client.get('statuses/user_timeline', parameters, function(error, tweets, response) {
-        if (error) {
-        console.log("error: " + error);
-        }
-        for(var i = 0; i < tweets.length; i++){
-        console.log("-------------");
-        console.log("Date: " + tweets[i].created_at);
-        console.log("Tweet: " + tweets[i].text);
-        console.log("---------------");
-}
-})
-}
+// function getTweets(){
+//     var client = new Twitter({
+//         consumer_key: key.twitterKeys.consumer_key,
+//         consumer_secret: key.twitterKeys.consumer_secret,
+//         access_token_key: key.twitterKeys.access_token_key,
+//         access_token_secret: key.twitterKeys.access_token_secret
+//     });
+//     var parameters = {
+//         twitterHandle: 'Ky-Chung',
+//         count: 20
+//     };
+//     client.get('statuses/user_timeline', parameters, function(error, tweets, response) {
+//         if (error) { 
+//             for (var i = 0; i < error.length; i++) {
+//                 console.log("error: " + error[i]);
+//             }
+//         } else{
+        
+//             for(var i = 0; i < tweets.length; i++){
+//                 console.log("-------------");
+//                 console.log("Date: " + tweets[i].created_at);
+//                 console.log("Tweet: " + tweets[i].text);
+//                 console.log("---------------");
+//             }
+//         }
+//     });
+
+
 
 function getMeSpotify(){
-    var spotifyApi = new Spotify({            
-        clientID: keys.spotifyKeys.client_id,
-        clientSecret: keys.spotifyKeys.client_secret
-    });
-
+    
+    var spotifyApi = new Spotify();
+    console.log(spotifyApi);
     spotifyApi.searchTracks(argument3, {limit: 1}).then(function (data) {
             var tracks = data.body.tracks.items;
             
             for (var i in tracks){
-                console.log("-----------------");
+                console.log("spotify function");
                 console.log("Artist: " + tracks[i].artist[0].name);
                 console.log("Song: " + tracks[i].name);
                 console.log("Preview: " + tracks[i].preview_url);
                 console.log("Album:" + tracks[i].album.name); 
                 console.log("-----------------");
-}; 
-})
-}
+            }; 
+    })
+};
 
 function getMovies(){
-    var query_url = "http:/www.omdbapi.com/?t=" + argument3 + "&y=&plot=long&tomatoes=true&r=json";
+    var query_url = "http://www.omdbapi.com/?t="+argument3+"&y=&plot=short&r=json ";
+    console.log(argument3);
+
     request(query_url, function (error, response, body) {
-    if (!error && response.statusCode == 200) {
-    console.log("--------------");
-    console.log("Title: " + JSON.parse(body).Title);
-    console.log("Year: " + JSON.parse(body).Released);
-    console.log("IMDB Rating: " + JSON.parse(body).IMDBRating);
-    console.log("Country: " + JSON.parse(body).Country);
-    console.log("Language: " + JSON.parse(body).Language);
-    console.log("Plot: " + JSON.parse(body).Plot);
-    console.log("Actors: " + JSON.parse(body).Actors);
-    console.log("Rotten Tomatoes Rating: " + JSON.parse(body).tomatoRating);
-    console.log("Rotten Tomatoes URL: " + JSON.parse(body).tomatoURL);
-    console.log("--------------");
-    }
-    else{
-        console.log(error);
-    }
-})
-}
+        if (!error && response.statusCode == 200) {
+            console.log("--------------");
+            console.log("Title: " + JSON.parse(body).Title);
+            console.log("Year: " + JSON.parse(body).Released);
+            console.log("IMDB Rating: " + JSON.parse(body).IMDBRating);
+            console.log("Country: " + JSON.parse(body).Country);
+            console.log("Language: " + JSON.parse(body).Language);
+            console.log("Plot: " + JSON.parse(body).Plot);
+            console.log("Actors: " + JSON.parse(body).Actors);
+            console.log("Rotten Tomatoes Rating: " + JSON.parse(body).tomatoRating);
+            console.log("Rotten Tomatoes URL: " + JSON.parse(body).tomatoURL);
+            console.log("--------------");
+        }
+        else{
+            console.log(error);
+        }
+    })
+};
 
 function doWhatItSays(){
     fs.readFile("random.txt", "utf8", function(error, data){
@@ -115,7 +120,7 @@ function doWhatItSays(){
         switchFunction();
 
     }); 
-}
+};
 
    
 
